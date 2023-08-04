@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logical_calculation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <table class="table">
+            <h1>Logical_calculation</h1>
+            <!-- Rows for Columns 1 to 5 -->
+            <tr class="tr">
+                <td>Column 1:</td>
+                <td><input type="number" id="column1"></td>
+            </tr>
+            <tr>
+                <td>Column 2:</td>
+                <td><input type="number" id="column2"></td>
+            </tr>
+            <tr>
+                <td>Column 3:</td>
+                <td><input type="number" id="column3Value"></td>
+            </tr>
+            <tr>
+                <td>Column 4:</td>
+                <td><input type="number" id="column4Value" readonly></td>
+            </tr>
+            <tr>
+                <td>Percentage:</td>
+                <td><input type="text" id="percentageInput"></td>
+            </tr>
+            <tr>
+                <td>Column 5:</td>
+                <td><input type="number" id="column5Value" readonly></td>
+            </tr>
+            <!-- New rows for Column 6 and Column 7 -->
+            <tr>
+                <td>Column 6:</td>
+                <td><input type="number" id="column6Value"></td>
+            </tr>
+            <tr>
+                <td>Column 7:</td>
+                <td><input type="number" id="column7Value" readonly></td>
+            </tr>
+            <tr>
+                <td>Column 8:</td>
+                <td><input type="number" id="column8Value" readonly></td>
+            </tr>
+            <!-- New rows for Column 9 and Column 10 -->
+            <tr>
+                <td>Column 9:</td>
+                <td><input type="number" id="column9Value"></td>
+            </tr>
+            <tr>
+                <td>Column 10:</td>
+                <td><input type="number" id="column10Value"></td>
+            </tr>
+            <!-- New row for Column 11 -->
+            <tr>
+                <td>Column 11:</td>
+                <td><input type="number" id="column11Value" readonly></td>
+            </tr>
+            <tr>
+                <td>Column 12:</td>
+                <td><input type="number" id="column12Value" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="calculateColumns()">Check</button></td>
+            </tr>
+            <tr>
+                <td>Column 13:</td>
+                <td><input type="number" id="column13Value" readonly></td>
+            </tr>
+            <tr>
+                <td>Column 14:</td>
+                <td><input type="number" id="column14Value" readonly></td>
+            </tr>
+            <tr>
+                <td>Column 15:</td>
+                <td><i id="column15ValueOutput"></i></td>
+            </tr>
+        </table>
+    </center>
+
+    <script>
+    const inputs = [
+        { input: document.getElementById("column1"), update: updateColumns },
+        { input: document.getElementById("column2"), update: updateColumns },
+        { input: document.getElementById("column3Value"), update: updateColumns },
+        { input: document.getElementById("percentageInput"), update: updateColumns },
+        { input: document.getElementById("column6Value"), update: updateColumns },
+        { input: document.getElementById("column9Value"), update: updateColumns },
+        { input: document.getElementById("column10Value"), update: updateColumns },
+        { input: document.getElementById("column7Value"), update: updateColumns },
+        { input: document.getElementById("column11Value"), update: updateColumns },
+    ];
+
+    inputs.forEach(({ input, update }) => input.addEventListener("input", update));
+
+    function updateColumns() {
+        const column1Value = parseFloat(column1.value);
+        const column2Value = parseFloat(column2.value);
+        const column3ValueNumber = parseFloat(column3Value.value);
+        const column4ValueNumber = column3ValueNumber * 1000;
+        const column5ValueNumber = column4ValueNumber * (parseFloat(percentageInput.value) / 100);
+        const column6ValueNumber = parseFloat(column6Value.value);
+        const column7ValueNumber = 100 - column6ValueNumber;
+        const column8ValueNumber = (column5ValueNumber * 100) / column7ValueNumber;
+        const column9ValueNumber = parseFloat(column9Value.value);
+        const column10ValueNumber = parseFloat(column10Value.value);
+        const column11ValueNumber = column9ValueNumber / column10ValueNumber;
+        const column12ValueNumber = column8ValueNumber / column11ValueNumber;
+
+        column3Value.value = !isNaN(column1Value * column2Value) ? column1Value * column2Value : "";
+        column4Value.value = !isNaN(column4ValueNumber) ? column4ValueNumber : "";
+        column5Value.value = !isNaN(column5ValueNumber) ? column5ValueNumber : "";
+        column7Value.value = !isNaN(column7ValueNumber) ? column7ValueNumber : "";
+        column8Value.value = !isNaN(column8ValueNumber) ? column8ValueNumber : "";
+        column11Value.value = !isNaN(column11ValueNumber) ? column11ValueNumber : "";
+        column12Value.value = !isNaN(column12ValueNumber) ? column12ValueNumber : "";
+    }
+    // Add an event listener to the "Check" button
+const checkButton = document.getElementById("checkButton");
+checkButton.addEventListener("click", calculateColumn13);
+
+function calculateColumns() {
+    const column12ValueNumber = parseFloat(column12Value.value);
+    const column13ValueNumber = Math.ceil(column12ValueNumber / 4.145);
+    const column14ValueNumber = Math.ceil(column13ValueNumber / 30);
+    const isTrue = column14ValueNumber <= 1;
+
+    column13Value.value = !isNaN(column13ValueNumber) ? column13ValueNumber : "";
+    column14Value.value = !isNaN(column14ValueNumber) ? column14ValueNumber : "";
+    column15ValueOutput.innerHTML = isTrue ? '<i class="fas fa-check-circle" style="color: green;"></i>' : '<i class="fas fa-times-circle" style="color: red;"></i>';
+}
+    
+</script>
+
+</body>
+</html>
